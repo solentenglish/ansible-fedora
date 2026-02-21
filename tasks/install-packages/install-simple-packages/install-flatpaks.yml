@@ -1,0 +1,17 @@
+- name: Add the Flathub repository
+  flatpak_remote:
+    name: flathub
+    state: present
+    flatpakrepo_url: https://dl.flathub.org/repo/flathub.flatpakrepo
+
+- name: Install Flatpak packages
+  flatpak:
+    name: "{{ item }}"
+    state: present
+    remote: flathub
+  loop:
+    - us.zoom.Zoom
+    - org.audacityteam.Audacity
+    - org.inkscape.Inkscape
+    - net.cozic.joplin_desktop
+    - md.obsidian.Obsidian

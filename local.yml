@@ -17,6 +17,7 @@
     - include_tasks: tasks/prepare-system/install-repos/install-repos.yml
     - include_tasks: tasks/prepare-system/install-development-tools/install-node.yml
     - include_tasks: tasks/install-packages/install-simple-packages/install-dnf.yml
+    - include_tasks: tasks/install-packages/install-simple-packages/install-flatpaks.yml
     - include_tasks: tasks/install-packages/install-other-packages/install-docker.yml
     - include_tasks: tasks/customisation/install-useful-scripts.yml
     - include_tasks: tasks/customisation/configure-apps.yml
