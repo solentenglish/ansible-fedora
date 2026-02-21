@@ -1,0 +1,5 @@
+ovpn_src: "files/customisation/surfshark/surfshark.ovpn"
+credentials_src: "files/customisation/surfshark/surfshark-credentials.txt"
+ovpn_dest: "/etc/openvpn/surfshark.ovpn"
+credentials_dest: "/etc/openvpn/surfshark-credentials.txt"
+systemd_unit_dest: "/etc/systemd/system/surfshark-openvpn.service"

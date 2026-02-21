@@ -1,0 +1,21 @@
+# Get the current date and time as a timestamp
+timestamp=$(date +"%Y-%m-%d_%H:%M")
+
+# Create a directory with the timestamp
+backup_dir="/home/glen/Desktop/$timestamp"
+mkdir -p "$backup_dir"
+chmod 777 "$backup_dir"
+
+cd /home/glen/Projects/iwt/docker/moodle_docker
+
+# Backup MySQL database
+sudo docker compose exec mariadb mysqldump -u root -pqSfXtpNVGjuG iwt_moodle > "$backup_dir/backup_$(date +"%Y%m%d").sql"
+
+# Create a zip file
+sudo docker compose exec moodle zip -r "/archive-$timestamp.zip" /var/www
+
+# Copy the zip file from the container to the host machine
+sudo docker cp moodle:/archive-$timestamp.zip "$backup_dir"
+
+# Remove the zip file in the docker container
+sudo docker compose exec moodle sh -c "rm /archive-$timestamp.zip"

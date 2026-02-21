@@ -1,0 +1,6 @@
+#!/bin/bash
+
+cd /home/glen//Projects/iwt/docker/moodle_docker
+sudo docker compose down
+cd /home/glen/Projects/iwt/docker/proxy_docker
+sudo docker compose up down

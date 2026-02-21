@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=Joplin
+Comment=Notetaking App
+Exec=/home/glen/.appImage/Joplin-3.0.14.AppImage --no-sandbox
+Icon=/home/glen/.appImage/icons/Joplin.png
+Terminal=false
+Type=Application
+Categories=Utility;Application;

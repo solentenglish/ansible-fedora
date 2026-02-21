@@ -1,0 +1,20 @@
+{
+	"font_size": 24,
+    "ui_scale": 1.25,
+	"ignored_packages":
+	[
+		"Vintage",
+	],
+	"theme": "Default.sublime-theme",
+	"index_files": true,
+	// Determines what character(s) are used to terminate each line in new files.
+    // Valid values are 'system' (whatever the OS uses), 'windows' (CRLF) and
+    // 'unix' (LF only).
+    "default_line_ending": "unix",
+
+    // Display file encoding in the status bar
+    "show_encoding": true,
+
+    // Display line endings in the status bar
+    "show_line_endings": true,
+}

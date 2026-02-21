@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=Audacity
+Comment=Audio Editor
+Exec=/home/glen/.appImage/Audacity-3.6.1.AppImage
+Icon=/home/glen/.appImage/icons/Audacity.png
+Terminal=false
+Type=Application
+Categories=Utility;Application;

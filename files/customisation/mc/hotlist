@@ -1,0 +1,15 @@
+# Projects
+ENTRY "Projects" URL "/home/glen/Projects"
+
+# Eleventy
+ENTRY "Eleventy Home" URL "/home/glen/Projects/eleventy/code"
+
+# Moodle
+ENTRY "Moodle Home" URL "~/Projects/iwt/moodle_data/html"
+ENTRY "Moodle -> Mychild Theme" URL "~/Projects/iwt/moodle_data/html/theme/mychild"
+ENTRY "Moodle -> Remui Theme" URL "~/Projects/iwt/moodle_data/html/theme/remui"
+
+# Configs
+ENTRY "Config -> Espanso" URL "~/.config/espanso"
+ENTRY "Config -> MC" URL "~/.config/mc"
+

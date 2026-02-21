@@ -1,0 +1,4 @@
+#!/bin/bash
+
+cd /home/glen/Projects/iwt/docker/moodle_docker
+sudo docker compose exec moodle bash

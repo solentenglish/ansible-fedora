@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=Lumi
+Comment=H5P Creator
+Exec=/home/glen/.appImage/Lumi-0.10.0.AppImage --no-sandbox
+Icon=/home/glen/.appImage/icons/Lumi.png
+Terminal=false
+Type=Application
+Categories=Utility;Application;

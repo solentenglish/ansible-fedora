@@ -1,0 +1,7 @@
+# This acts as a barrel file to load specific variable files
+include_files:
+  - openvpn-vars.yml
+  - system-vars.yml
+
+# Load each file dynamically
+vars_files: "{{ include_files | map('basename') | list }}"
