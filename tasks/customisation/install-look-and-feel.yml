@@ -6,20 +6,22 @@
     group: "{{ user }}"
     mode: "0644"
 
-- name: Copy wallpaper
-  ansible.builtin.copy:
-    src: files/customisation/desktop/wallpaper.png
-    dest: "{{ home }}/Pictures" # Fedora uses ~/Pictures by default too
-    owner: "{{ user }}"
-    group: "{{ user }}"
-    mode: "0644"
+- name: Ensure Breeze wallpaper directory exists
+  ansible.builtin.file:
+    path: /usr/share/wallpapers/Breeze/contents/images
+    state: directory
+    owner: root
+    group: root
+    mode: "0755"
+  become: yes
 
-- name: Copy wallpaper for login screen (Fedora Path)
+- name: Copy wallpaper for login screen (Fedora)
   ansible.builtin.copy:
     src: files/customisation/desktop/wallpaper.png
-    # Fedora KDE uses the Breeze theme directory for the login screen
+    # On Fedora, it's safer to target the specific default filename
     dest: "/usr/share/wallpapers/Breeze/contents/images/1920x1080.png"
     owner: "root"
     group: "root"
     mode: "0644"
+    setype: usr_t  # This helps SELinux recognize it as a system file
   become: yes
