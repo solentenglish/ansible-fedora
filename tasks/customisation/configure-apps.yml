@@ -1,0 +1,34 @@
+- name: Set Git user identity
+  become_user: "{{ user }}"
+  git_config:
+    name: "{{ item.name }}"
+    scope: global
+    value: "{{ item.value }}"
+  with_items:
+    - { name: 'user.email', value: 'glensutton@fastmail.com' }
+    - { name: 'user.name', value: 'Glen Sutton' }
+
+- name: Create config directories
+  file:
+    path: "{{ item }}"
+    state: directory
+    owner: "{{ user }}"
+    group: "{{ user }}"
+    mode: "0755"
+  with_items:
+    - "{{ home }}/.config/mc"
+    - "{{ home }}/.local/share"
+    - "{{ home }}/.config/sublime-text/Packages/User"
+
+- name: Deploy application configs
+  copy:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    owner: "{{ user }}"
+    group: "{{ user }}"
+    mode: "0644"
+  with_items:
+    - { src: 'files/customisation/mc/hotlist', dest: '{{ home }}/.config/mc' }
+    - { src: 'files/customisation/dolphin/user-places.xbel', dest: '{{ home }}/.local/share' }
+    - { src: 'files/customisation/sublime/Default.sublime-theme', dest: '{{ home }}/.config/sublime-text/Packages/User/' }
+    - { src: 'files/customisation/sublime/Preferences.sublime-settings', dest: '{{ home }}/.config/sublime-text/Packages/User/' }

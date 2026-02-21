@@ -1,0 +1,23 @@
+- hosts: localhost
+  connection: local
+  become: true
+
+  pre_tasks:
+    - name: Load all variable files from vars directory
+      include_vars:
+        dir: vars
+        files_matching: '.*\.yml'
+
+    - name: Update DNF cache
+      dnf:
+        update_cache: yes
+      changed_when: False
+
+  tasks:
+    - include_tasks: tasks/prepare-system/install-repos/install-repos.yml
+    - include_tasks: tasks/install-packages/install-simple-packages/install-dnf.yml
+    - include_tasks: tasks/install-packages/install-simple-packages/install-pips.yml
+    - include_tasks: tasks/install-packages/install-simple-packages/install-snaps.yml
+    - include_tasks: tasks/customisation/install-useful-scripts.yml
+    - include_tasks: tasks/customisation/configure-apps.yml
+    - include_tasks: tasks/mount-filesystem/mount-filesystem.yml

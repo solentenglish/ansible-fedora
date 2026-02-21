@@ -1,0 +1,19 @@
+- name: Ensure the destination directory exists
+  file:
+    path: "{{ home }}/.local/bin"
+    state: directory
+    mode: '0755'
+
+- name: Copy bash scripts to the destination directory
+  copy:
+    src: "files/scripts/{{ item }}"
+    dest: "{{ home }}/.local/bin/{{ item }}"
+    mode: '0755'
+  with_items:
+    - backup
+    - mariadb
+    - moodle
+    - mouse
+    - server
+    - start
+    - stop

@@ -1,0 +1,28 @@
+- name: Install OpenVPN and NetworkManager plugin
+  dnf:
+    name:
+      - openvpn
+      - NetworkManager-openvpn
+      - NetworkManager-openvpn-gnome # For GUI integration
+    state: present
+
+- name: Import Surfshark VPN profile to NetworkManager
+  become_user: "{{ user }}"
+  shell: |
+    nmcli connection import type openvpn file "{{ home }}/{{ ovpn_src }}"
+  args:
+    creates: "/etc/NetworkManager/system-connections/surfshark.nmconnection"
+  register: nm_import
+  ignore_errors: yes
+
+- name: Configure Surfshark Credentials in NetworkManager
+  become: yes
+  lineinfile:
+    path: "/etc/NetworkManager/system-connections/{{ nm_import.stdout | default('surfshark') }}.nmconnection"
+    regexp: '^password-flags='
+    line: 'password-flags=0'
+  when: nm_import.rc == 0
+
+- name: Fix SELinux permissions for VPN config
+  command: restorecon -Rv /etc/NetworkManager/system-connections/
+  changed_when: false

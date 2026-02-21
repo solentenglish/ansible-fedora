@@ -1,0 +1,29 @@
+- name: Install DNF packages
+  dnf:
+    name:
+      - mc
+      - sublime-text
+      - curl
+      - gnupg2
+      - yt-dlp
+      - gimp
+      - okular
+      - gparted
+      - transmission-gtk
+      - vlc
+      - ffmpeg
+      - gpick
+      - tlp
+      - calibre
+      - nss
+      - pandoc
+      - refind
+      - hunspell-es
+      - ImageMagick
+      - openvpn
+      - unrar
+      - net-tools
+      - docker-ce
+      - docker-ce-cli
+      - containerd.io
+    state: present

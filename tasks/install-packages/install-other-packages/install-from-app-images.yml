@@ -1,0 +1,26 @@
+- name: Ensure icon and application directories exist
+  file:
+    path: "{{ item }}"
+    state: directory
+    owner: "{{ user }}"
+    group: "{{ user }}"
+    mode: '0755'
+  with_items:
+    - "{{ home }}/.appImage/icons"
+    - "{{ home }}/.local/share/applications"
+
+- name: Copy AppImage icons
+  copy:
+    src: "{{ item }}"
+    dest: "{{ home }}/.appImage/icons/"
+    mode: '0644'
+  with_fileglob:
+    - "files/app-images/*.png"
+
+- name: Deploy .desktop files
+  copy:
+    src: "{{ item }}"
+    dest: "{{ home }}/.local/share/applications/"
+    mode: '0644'
+  with_fileglob:
+    - "files/app-images/*.desktop"

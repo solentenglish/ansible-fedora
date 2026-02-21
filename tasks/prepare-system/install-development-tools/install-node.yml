@@ -1,0 +1,37 @@
+- name: Ensure development dependencies are installed
+  dnf:
+    name:
+      - curl
+      - git
+      - make
+      - gcc-c++
+      - procps-ng  # Fedora equivalent for certain process tools
+    state: present
+
+- name: Check if NVM is already installed
+  stat:
+    path: "{{ home }}/.nvm/nvm.sh"
+  register: nvm_stat
+
+- name: Install NVM
+  shell: |
+    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
+  args:
+    creates: "{{ home }}/.nvm/nvm.sh"
+  environment:
+    HOME: "{{ home }}"
+  when: not nvm_stat.stat.exists
+
+- name: Install Node.js via NVM
+  shell: |
+    export NVM_DIR="{{ home }}/.nvm"
+    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+    nvm install --lts
+    nvm alias default 'lts/*'
+  args:
+    executable: /bin/bash
+    chdir: "{{ home }}"
+  environment:
+    HOME: "{{ home }}"
+  register: node_install
+  changed_when: "'is already installed' not in node_install.stdout"
