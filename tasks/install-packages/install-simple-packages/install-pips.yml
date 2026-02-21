@@ -1,0 +1,6 @@
+- name: Install Python packages via pip
+  ansible.builtin.pip:
+    name:
+      - konsave
+    executable: pip3
+    state: present
