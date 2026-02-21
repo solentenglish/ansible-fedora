@@ -1,34 +1,14 @@
-- name: Set Git user identity
-  become_user: "{{ user }}"
-  git_config:
-    name: "{{ item.name }}"
-    scope: global
-    value: "{{ item.value }}"
-  with_items:
-    - { name: 'user.email', value: 'glensutton@fastmail.com' }
-    - { name: 'user.name', value: 'Glen Sutton' }
-
-- name: Create config directories
+- name: Create mount points
   file:
-    path: "{{ item }}"
+    path: "/mnt/{{ item }}"
     state: directory
-    owner: "{{ user }}"
-    group: "{{ user }}"
-    mode: "0755"
-  with_items:
-    - "{{ home }}/.config/mc"
-    - "{{ home }}/.local/share"
-    - "{{ home }}/.config/sublime-text/Packages/User"
+  with_items: [pop, shared_data, windows]
 
-- name: Deploy application configs
-  copy:
-    src: "{{ item.src }}"
-    dest: "{{ item.dest }}"
-    owner: "{{ user }}"
-    group: "{{ user }}"
-    mode: "0644"
+- name: Configure FSTAB
+  lineinfile:
+    path: /etc/fstab
+    line: "{{ item }}"
   with_items:
-    - { src: 'files/customisation/mc/hotlist', dest: '{{ home }}/.config/mc' }
-    - { src: 'files/customisation/dolphin/user-places.xbel', dest: '{{ home }}/.local/share' }
-    - { src: 'files/customisation/sublime/Default.sublime-theme', dest: '{{ home }}/.config/sublime-text/Packages/User/' }
-    - { src: 'files/customisation/sublime/Preferences.sublime-settings', dest: '{{ home }}/.config/sublime-text/Packages/User/' }
+    - 'UUID=700FF4BE379CCE65  /mnt/shared_data  ntfs-3g  defaults,uid=1000,gid=1000  0  2'
+    - 'UUID=c445160d-43ba-4301-b7cd-7d0df6367a4a  /mnt/pop  ext4  defaults  0  2'
+    - 'UUID=4A96B7C096B7AB39  /mnt/windows  ntfs-3g  defaults,uid=1000,gid=1000  0  0'

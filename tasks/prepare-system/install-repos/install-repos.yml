@@ -1,0 +1,17 @@
+- name: Add Sublime Text repository
+  get_url:
+    url: https://download.sublimetext.com/rpm/stable/x86_64/sublime-text.repo
+    dest: /etc/yum.repos.d/sublime-text.repo
+
+- name: Add Docker repository
+  get_url:
+    url: https://download.docker.com/linux/fedora/docker-ce.repo
+    dest: /etc/yum.repos.d/docker-ce.repo
+
+- name: Enable RPM Fusion
+  dnf:
+    name:
+      - https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm
+      - https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
+    state: present
+    disable_gpg_check: yes
