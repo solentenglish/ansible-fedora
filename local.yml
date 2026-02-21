@@ -5,7 +5,7 @@
   pre_tasks:
     - name: Load all variable files from vars directory
       include_vars:
-        dir: vars
+        dir: "{{ playbook_dir }}/vars"
         files_matching: '.*\.yml'
 
     - name: Update DNF cache
