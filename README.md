@@ -18,7 +18,8 @@ cat ~/.ssh/id_ed25519.pub
 
 - [ ] Run the playbook
 ```bash
-ansible-pull -U git@github.com:solentenglish/ansible-fedora.git --accept-host-key --ask-become-pass
+ansible-pull -U git@github.com:solentenglish/ansible-fedora.git  ansible-galaxy collection install community.general && ansible-pull -U git@github.com:solentenglish/ansible-fedora.git --accept-host-key --ask-become-pass
+--accept-host-key --ask-become-pass
 ```
 
 

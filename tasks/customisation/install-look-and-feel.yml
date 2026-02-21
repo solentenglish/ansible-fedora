@@ -1,0 +1,25 @@
+- name: Copy konsave .knsv file
+  ansible.builtin.copy:
+    src: files/customisation/konsave/settings.knsv
+    dest: /var/tmp
+    owner: "{{ user }}"
+    group: "{{ user }}"
+    mode: "0644"
+
+- name: Copy wallpaper
+  ansible.builtin.copy:
+    src: files/customisation/desktop/wallpaper.png
+    dest: "{{ home }}/Pictures" # Fedora uses ~/Pictures by default too
+    owner: "{{ user }}"
+    group: "{{ user }}"
+    mode: "0644"
+
+- name: Copy wallpaper for login screen (Fedora Path)
+  ansible.builtin.copy:
+    src: files/customisation/desktop/wallpaper.png
+    # Fedora KDE uses the Breeze theme directory for the login screen
+    dest: "/usr/share/wallpapers/Breeze/contents/images/1920x1080.png"
+    owner: "root"
+    group: "root"
+    mode: "0644"
+  become: yes
