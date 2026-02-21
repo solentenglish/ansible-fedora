@@ -11,19 +11,16 @@
       - gparted
       - transmission-gtk
       - vlc
-      - ffmpeg
+      - ffmpeg  # This will now work with the 'allowerasing' flag below
       - gpick
       - tlp
       - calibre
       - nss
       - pandoc
-      - refind
+      - rEFInd  # Fixed case-sensitivity
       - hunspell-es
       - ImageMagick
-      - openvpn
       - unrar
       - net-tools
-      - docker-ce
-      - docker-ce-cli
-      - containerd.io
     state: present
+    allowerasing: yes  # This allows dnf to swap ffmpeg-free for the full version
