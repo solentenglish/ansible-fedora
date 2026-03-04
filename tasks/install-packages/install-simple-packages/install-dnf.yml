@@ -22,5 +22,6 @@
       - ImageMagick
       - unrar
       - net-tools
+      - syncthing
     state: present
     allowerasing: yes  # This allows dnf to swap ffmpeg-free for the full version
